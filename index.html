@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Thirty Day ENGAGE Challenge</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  :root{
+    --forest:#1A4A3A;
+    --mint:#6ECFB5;
+    --mint-pale:#E8F8F3;
+    --pink:#ED93B1;
+    --pink-pale:#FCEEF3;
+    --yellow:#FFE600;
+    --cream:#FBFAF7;
+    --ink:#222222;
+    --grey:#666666;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    line-height:1.6;
+  }
+
+  .wrap{max-width:820px; margin:0 auto; padding:0 32px;}
+
+  header{
+    background:var(--cream);
+    padding:36px 0 28px;
+    border-bottom:1px solid #E2DFD6;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+  header img{height:44px; width:auto; display:block; mix-blend-mode:multiply;}
+  header .doc-tag{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-size:14px;
+    color:var(--grey);
+  }
+
+  .hero{
+    background:var(--pink);
+    padding:52px 0 44px;
+    box-shadow: 0 8px 24px rgba(26,74,58,0.12);
+    position:relative;
+    z-index:1;
+  }
+  .hero .eyebrow{
+    font-family:'Poppins', sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--forest);
+    font-weight:600;
+    opacity:0.75;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    font-family:'Lora', serif;
+    color:var(--forest);
+    font-size:36px;
+    line-height:1.2;
+    max-width:600px;
+    margin-bottom:16px;
+  }
+  .hero p.lead{
+    font-size:16px;
+    color:var(--forest);
+    opacity:0.9;
+    max-width:560px;
+  }
+
+  section{padding:44px 0 8px;}
+  section h2{
+    font-family:'Lora', serif;
+    font-size:23px;
+    color:var(--forest);
+    margin-bottom:16px;
+  }
+  section p{
+    font-size:15.5px;
+    color:var(--ink);
+    max-width:680px;
+    margin-bottom:14px;
+  }
+
+  .callout{
+    background:var(--mint-pale);
+    border-radius:6px;
+    padding:22px 26px;
+    font-family:'Lora', serif;
+    font-style:italic;
+    color:var(--forest);
+    font-size:15.5px;
+    line-height:1.7;
+    margin:20px 0 8px;
+  }
+
+  /* ENGAGE steps */
+  .engage-list{margin-top:20px;}
+  .engage-step{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:14px 0;
+    border-top:1px solid #E2DFD6;
+  }
+  .engage-step:first-child{border-top:none;}
+  .engage-letter{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--mint);
+    background:var(--forest);
+    width:38px;
+    height:38px;
+    min-width:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .engage-text{min-width:220px;}
+  .engage-name{font-weight:600; color:var(--forest); font-size:15px;}
+  .engage-desc{font-size:13.5px; color:var(--grey);}
+  .engage-line{
+    flex:1;
+    border-bottom:1px dotted #C7C2B6;
+    height:1px;
+    min-width:60px;
+  }
+
+  /* Commitments */
+  .commitment{
+    display:flex;
+    gap:18px;
+    padding:18px 0;
+    border-top:1px solid #E2DFD6;
+    align-items:flex-start;
+  }
+  .commitment:first-child{border-top:none;}
+  .commitment-num{
+    font-family:'Lora', serif;
+    font-size:26px;
+    color:var(--mint);
+    font-weight:600;
+    min-width:36px;
+  }
+  .commitment-title{font-weight:600; color:var(--forest); font-size:16px; margin-bottom:4px;}
+  .commitment-desc{font-size:14.5px; color:var(--ink); opacity:0.85; max-width:560px;}
+
+  /* Tracker */
+  .tracker-intro{margin-bottom:22px;}
+  .tracker-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .day-cell{
+    background:#fff;
+    border:1px solid #E2DFD6;
+    border-radius:6px;
+    padding:10px 10px 12px;
+  }
+  .day-num{
+    font-family:'Lora', serif;
+    font-weight:600;
+    color:var(--forest);
+    font-size:15px;
+    margin-bottom:6px;
+  }
+  .check-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:11px;
+    color:var(--grey);
+    margin-bottom:3px;
+  }
+  .check-row .box{
+    width:11px;
+    height:11px;
+    border:1.3px solid var(--forest);
+    border-radius:2px;
+    display:inline-block;
+    flex-shrink:0;
+  }
+
+  /* Weeks */
+  .weeks-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:8px;
+  }
+  .week-card{
+    background:var(--pink-pale);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .week-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .week-label{font-weight:600; color:var(--forest); font-size:15px;}
+  .week-range{font-size:12px; color:var(--grey);}
+  .week-question{font-size:14px; color:var(--ink); margin-bottom:14px;}
+  .week-lines .line{border-bottom:1px dotted #C7A9B6; height:18px;}
+
+  .ritual-box{
+    background:#fff;
+    border:1.5px dashed var(--mint);
+    border-radius:8px;
+    padding:24px 26px;
+    margin-top:20px;
+  }
+  .ritual-note{font-size:13.5px; color:var(--grey); margin-bottom:0;}
+
+  /* Somatic sections */
+  .subhead{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--forest);
+    margin:26px 0 10px;
+  }
+
+  .step-list{margin-top:14px;}
+  .step-item{
+    display:flex;
+    gap:16px;
+    padding:12px 0;
+    border-top:1px solid #E2DFD6;
+  }
+  .step-item:first-child{border-top:none;}
+  .step-num{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--mint);
+    min-width:28px;
+  }
+  .step-text{font-size:14.5px; color:var(--ink);}
+
+  /* Breathing pacer */
+  .pacer-card{
+    background:var(--forest);
+    border-radius:10px;
+    padding:36px 26px;
+    text-align:center;
+    margin-top:22px;
+  }
+  .pacer-circle-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:200px;
+    margin-bottom:20px;
+  }
+  .pacer-circle{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:var(--mint);
+    transition: transform 4s ease-in-out;
+    transform:scale(1);
+  }
+  .pacer-label{
+    font-family:'Lora', serif;
+    font-style:italic;
+    color:var(--mint-pale);
+    font-size:17px;
+    margin-bottom:18px;
+    min-height:24px;
+  }
+  .pacer-btn{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    background:var(--mint);
+    color:var(--forest);
+    border:none;
+    padding:11px 26px;
+    border-radius:24px;
+    cursor:pointer;
+  }
+  .pacer-btn:hover{opacity:0.9;}
+
+  /* State check */
+  .state-check{
+    display:flex;
+    gap:14px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .state-btn{
+    flex:1;
+    min-width:220px;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    background:#fff;
+    border:1.5px solid var(--mint);
+    color:var(--forest);
+    padding:14px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:left;
+  }
+  .state-btn:hover{background:var(--mint-pale);}
+  .state-result{
+    display:none;
+    background:var(--mint-pale);
+    border-radius:6px;
+    padding:20px 24px;
+    margin-top:16px;
+    font-size:14.5px;
+    color:var(--forest);
+  }
+  .state-result.visible{display:block;}
+  .state-result strong{display:block; margin-bottom:6px; font-family:'Lora', serif; font-size:16px;}
+
+  /* Archetype accordion */
+  .archetype-detail{
+    border:1px solid #E2DFD6;
+    border-radius:8px;
+    padding:16px 20px;
+    margin-top:12px;
+    background:#fff;
+  }
+  .archetype-detail summary{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--forest);
+    cursor:pointer;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .archetype-detail summary::-webkit-details-marker{display:none;}
+  .archetype-detail summary::after{
+    content:"+";
+    font-size:20px;
+    color:var(--mint);
+    font-weight:600;
+  }
+  .archetype-detail[open] summary::after{content:"\2212";}
+  .archetype-intro{font-size:14px; color:var(--grey); margin:12px 0 14px;}
+  .move-list{margin-top:4px;}
+  .move-item{padding:10px 0; border-top:1px solid #EDEAE2;}
+  .move-item:first-child{border-top:none;}
+  .move-title{font-weight:600; color:var(--forest); font-size:14.5px; margin-bottom:3px;}
+  .move-desc{font-size:13.5px; color:var(--ink); opacity:0.85; margin-bottom:0;}
+
+  footer{
+    background:var(--forest);
+    padding:32px 0;
+    text-align:center;
+    margin-top:40px;
+  }
+  footer p{
+    color:var(--mint-pale);
+    font-size:13px;
+    opacity:0.85;
+  }
+
+  @media print {
+    .hero { box-shadow:none; }
+    section { page-break-inside: avoid; }
+    .tracker-section { page-break-before: always; }
+  }
+
+  @media (max-width:600px){
+    .hero h1{font-size:26px;}
+    .tracker-grid{grid-template-columns:repeat(3, 1fr);}
+    .weeks-grid{grid-template-columns:1fr;}
+    .engage-step{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="data:image/png;base64,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" alt="The Influence Lab logo">
+    <div class="doc-tag">For TURA Thread attendees &middot; ENGAGE</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Your Challenge</div>
+    <h1>Your Thirty Day ENGAGE Challenge</h1>
+    <p class="lead">You built this in the room. This is where it becomes a habit. Thirty days, one ritual, one archetype, one intention at a time.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Why Thirty Days</h2>
+    <p>Regulation is not a retreat, it's a daily practice that becomes a habit. Thirty days isn't arbitrary, research on habit formation, Lally et al., 2010, shows this is roughly the window in which a deliberate practice starts to become automatic, the point where setting intent each morning stops being effortful and starts being how the day simply begins.</p>
+    <div class="callout">You already know your archetype, you already built your ritual in the room. The only job left is to run it, notice what happens, and stay honest about it for thirty days.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Your Ritual, In Your Own Words</h2>
+    <p>Copy across what you wrote in the room. Six steps, specific to your apartment, your mornings, your archetype.</p>
+    <div class="engage-list">
+
+      <div class="engage-step">
+        <div class="engage-letter">E</div>
+        <div class="engage-text">
+          <div class="engage-name">Emerge</div>
+          <div class="engage-desc">Feet on the floor, no screen, ninety seconds.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-letter">N</div>
+        <div class="engage-text">
+          <div class="engage-name">Notice</div>
+          <div class="engage-desc">A body scan, no fixing.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-letter">G</div>
+        <div class="engage-text">
+          <div class="engage-name">Ground</div>
+          <div class="engage-desc">Your archetype's somatic shake and breath.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-letter">A</div>
+        <div class="engage-text">
+          <div class="engage-name">Archetype</div>
+          <div class="engage-desc">Which pattern is already active.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-letter">G</div>
+        <div class="engage-text">
+          <div class="engage-name">Give Intention</div>
+          <div class="engage-desc">One sentence, spoken out loud.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+      <div class="engage-step">
+        <div class="engage-letter">E</div>
+        <div class="engage-text">
+          <div class="engage-name">Engage</div>
+          <div class="engage-desc">Now the phone. Now the day.</div>
+        </div>
+        <div class="engage-line"></div>
+      </div>
+    </div>
+    <div class="ritual-box">
+      <p class="ritual-note">Not sure where to start each morning? Read this box before you pick up your phone.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The Somatic Toolkit</h2>
+    <p>Regulation doesn't happen by thinking your way out of a state, it happens through the body. The nervous system responds to sensation and movement faster than it responds to logic, which is why the Ground step in your ritual is physical rather than mental. The three practices below give you real tools for that step, not just the idea of it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Activate Your Diaphragm</h2>
+    <p>Most people breathe from the chest under stress, which keeps the body's alert system switched on. Breathing from the diaphragm, the large muscle beneath your lungs, is one of the fastest ways to signal safety to your nervous system.</p>
+    <p class="subhead">Check which way you're breathing right now</p>
+    <p>Place one hand on your chest and one on your belly. Breathe normally. Notice which hand moves more. If the chest hand moves more than the belly hand, you're breathing shallow, and that's exactly what this practice retrains.</p>
+    <p class="subhead">The technique</p>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-text">Sit or stand with a long spine and relaxed shoulders.</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-text">Place one hand on your belly, just below your ribs.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-text">Inhale slowly through the nose for a count of four, feeling your belly hand rise while your chest stays relatively still.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-text">Hold gently for a count of four.</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-text">Exhale slowly through the mouth for a count of six, feeling your belly hand fall.</div></div>
+      <div class="step-item"><div class="step-num">6</div><div class="step-text">Repeat for six full cycles.</div></div>
+    </div>
+    <div class="pacer-card">
+      <div class="pacer-label" id="pacerLabel">Press start when you're ready</div>
+      <div class="pacer-circle-wrap">
+        <div class="pacer-circle" id="pacerCircle"></div>
+      </div>
+      <button class="pacer-btn" id="pacerBtn" onclick="togglePacer()">Start Breathing</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The Somatic Shake</h2>
+    <p>This is the Ground step referenced in your ritual, and it draws on the same mechanism animals use to discharge stress once a threat has passed. It looks unremarkable and it works precisely because it doesn't ask you to think your way through anything.</p>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-text">Standing or seated, gently shake your hands for twenty seconds.</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-text">Let the shake travel up into your forearms for twenty seconds.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-text">Shake your whole arms, loose at the shoulder, for twenty seconds.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-text">If you're able to stand, let your legs join, a loose bounce through the knees, for thirty seconds.</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-text">Come to stillness. Notice what's different before you move on.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Quick State Check</h2>
+    <p>Not sure what your body needs right now? Choose whichever is true this moment.</p>
+    <div class="state-check">
+      <button class="state-btn" onclick="showState('hyper')">I feel keyed up, urgent, racing</button>
+      <button class="state-btn" onclick="showState('hypo')">I feel flat, numb, checked out</button>
+    </div>
+    <div class="state-result" id="stateHyper">
+      <strong>You're above the window</strong>
+      Reach for slow, weighted, downregulating movement. Try the Wall Press or Slow Forward Fold from the Navigator's list below, or six rounds of the diaphragm breath above.
+    </div>
+    <div class="state-result" id="stateHypo">
+      <strong>You're below the window</strong>
+      Reach for gentle, activating movement. Try the Shake Out or Humming from the Anchor's list below, to bring sensation back before you try to think clearly.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Movement By Archetype</h2>
+    <p>Three practices for your own archetype, and worth glancing at the others too, since your state shifts day to day. Tap each one open.</p>
+
+      <details class="archetype-detail">
+        <summary>The Navigator</summary>
+        <p class="archetype-intro">Momentum as coping. Your nervous system runs hot and fast, so the movement that helps is slow, weighted and deliberately unhurried.</p>
+        <div class="move-list">
+
+          <div class="move-item">
+            <div class="move-title">Wall Press</div>
+            <p class="move-desc">Both palms flat against a wall, push firmly for twenty seconds, release. Repeat three times. The resistance discharges built up urgency into the muscles rather than into another task.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Slow Forward Fold</div>
+            <p class="move-desc">Standing feet hip width apart, slowly hinge forward, letting your head and arms hang heavy for six breaths. Come up slowly. This tells the nervous system there is no need to rush anywhere.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Barefoot Pause</div>
+            <p class="move-desc">Stand barefoot on the floor for two minutes before your first task. Feel the actual contact of your feet, not the plan for the day.</p>
+          </div>
+        </div>
+      </details>
+      <details class="archetype-detail">
+        <summary>The Anchor</summary>
+        <p class="archetype-intro">Stillness mistaken for strength. Suppression needs movement that brings sensation back, gently, rather than more stillness.</p>
+        <div class="move-list">
+
+          <div class="move-item">
+            <div class="move-title">Shake Out</div>
+            <p class="move-desc">Stand and gently shake your hands, then your arms, then bounce lightly on your feet for sixty seconds. Let sound come out if it wants to, a sigh, a hum, anything.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Humming Or Toning</div>
+            <p class="move-desc">A long, low hum for the length of one exhale, five times. The vibration stimulates the vagus nerve directly, one of the few movements that works on suppression specifically.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Havening Touch</div>
+            <p class="move-desc">Cross your arms over your chest and stroke from shoulder to elbow, slowly, ten times each side. A self soothing touch that doesn't require anyone else's permission.</p>
+          </div>
+        </div>
+      </details>
+      <details class="archetype-detail">
+        <summary>The Architect</summary>
+        <p class="archetype-intro">Logic as emotional architecture. The way out is movement with no plan attached, since planning is exactly what the pattern reaches for.</p>
+        <div class="move-list">
+
+          <div class="move-item">
+            <div class="move-title">Cross Body March</div>
+            <p class="move-desc">March on the spot, touching each opposite knee with the opposite hand, twenty times. Crossing the midline of the body engages both hemispheres and interrupts a purely analytical loop.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Unplanned Movement</div>
+            <p class="move-desc">Set a timer for ninety seconds and move however your body wants to, with no shape or sequence decided in advance. For the Architect specifically, the absence of a plan is the point.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Shoulder Rolls With Exhale</div>
+            <p class="move-desc">Ten slow shoulder rolls, backward, each one paired with a long exhale. Simple, physical, nothing to analyse.</p>
+          </div>
+        </div>
+      </details>
+      <details class="archetype-detail">
+        <summary>The Connector</summary>
+        <p class="archetype-intro">Attuned to everyone except themselves. The movement that helps is small and simple, taking up space rather than making room for someone else's.</p>
+        <div class="move-list">
+
+          <div class="move-item">
+            <div class="move-title">Power Stance</div>
+            <p class="move-desc">Stand tall, feet apart, hands on hips or arms raised overhead, and hold for thirty seconds. Physically taking up space before a day spent making room for everyone else.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Arm Sweep</div>
+            <p class="move-desc">Sweep both arms out to the sides and up overhead on an inhale, then down in front of you on the exhale. Repeat five times. Claiming the space around your own body first.</p>
+          </div>
+          <div class="move-item">
+            <div class="move-title">Self Hug And Tap</div>
+            <p class="move-desc">Cross your arms over your chest, hands on opposite shoulders, and alternate tapping gently, left, right, left, right, for one minute. A grounding, bilateral practice that turns attention inward.</p>
+          </div>
+        </div>
+      </details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The Three Commitments</h2>
+    <p>This is the whole challenge. Nothing else to add, nothing else needed.</p>
+
+      <div class="commitment">
+        <div class="commitment-num">1</div>
+        <div>
+          <div class="commitment-title">Run your ENGAGE ritual</div>
+          <div class="commitment-desc">Before you pick up your phone, every working day. Six steps, fifteen minutes, done before the first notification sets the tone of the morning.</div>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commitment-num">2</div>
+        <div>
+          <div class="commitment-title">Use your archetype's interval practice</div>
+          <div class="commitment-desc">At least once a day. A short, deliberate return to the window when you notice yourself starting to drift out of it.</div>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commitment-num">3</div>
+        <div>
+          <div class="commitment-title">Note it once a week</div>
+          <div class="commitment-desc">Whether you caught a pattern before it ran the whole day. Not a diary, just an honest yes or no.</div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="tracker-section">
+  <div class="wrap">
+    <h2>Your Thirty Day Tracker</h2>
+    <p class="tracker-intro">Tick Ritual on the mornings you run your ENGAGE ritual before your phone. Tick Interval on the days you use your archetype's interval practice. Nothing to overthink, just an honest mark at the end of the day.</p>
+    <div class="tracker-grid">
+
+      <div class="day-cell">
+        <div class="day-num">01</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">02</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">03</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">04</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">05</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">06</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">07</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">08</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">09</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">10</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">11</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">12</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">13</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">14</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">15</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">16</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">17</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">18</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">19</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">20</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">21</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">22</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">23</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">24</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">25</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">26</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">27</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">28</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">29</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+      <div class="day-cell">
+        <div class="day-num">30</div>
+        <label class="check-row"><span class="box"></span> Ritual</label>
+        <label class="check-row"><span class="box"></span> Interval</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Weekly Check In</h2>
+    <p>Once a week, note whether you caught a pattern before it ran the whole day. Four honest check ins across the month.</p>
+    <div class="weeks-grid">
+
+      <div class="week-card">
+        <div class="week-head">
+          <span class="week-label">Week One</span>
+          <span class="week-range">Days 1 to 7</span>
+        </div>
+        <p class="week-question">What did you notice about the mornings you ran the ritual, versus the mornings you didn't?</p>
+        <div class="week-lines">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-head">
+          <span class="week-label">Week Two</span>
+          <span class="week-range">Days 8 to 14</span>
+        </div>
+        <p class="week-question">Has your interval practice caught a pattern before it ran the whole day? What happened?</p>
+        <div class="week-lines">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-head">
+          <span class="week-label">Week Three</span>
+          <span class="week-range">Days 15 to 21</span>
+        </div>
+        <p class="week-question">Is the ritual starting to feel automatic, or still effortful? Either answer is useful information.</p>
+        <div class="week-lines">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-head">
+          <span class="week-label">Week Four</span>
+          <span class="week-range">Days 22 to 30</span>
+        </div>
+        <p class="week-question">Looking back at the month, what's actually changed, in your mornings and beyond them?</p>
+        <div class="week-lines">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>ENGAGE &middot; The Influence Lab &middot; Built for TURA Thread residents</p>
+</footer>
+
+<script>
+  let pacerActive = false;
+  let pacerTimeout = null;
+
+  function pacerCycle() {
+    if (!pacerActive) return;
+    const circle = document.getElementById('pacerCircle');
+    const label = document.getElementById('pacerLabel');
+
+    label.textContent = 'Breathe in\u2026';
+    circle.style.transition = 'transform 4s ease-in-out';
+    circle.style.transform = 'scale(1.6)';
+
+    pacerTimeout = setTimeout(() => {
+      if (!pacerActive) return;
+      label.textContent = 'Hold';
+      pacerTimeout = setTimeout(() => {
+        if (!pacerActive) return;
+        label.textContent = 'Breathe out\u2026';
+        circle.style.transition = 'transform 6s ease-in-out';
+        circle.style.transform = 'scale(1)';
+        pacerTimeout = setTimeout(pacerCycle, 6000);
+      }, 4000);
+    }, 4000);
+  }
+
+  function togglePacer() {
+    const btn = document.getElementById('pacerBtn');
+    const label = document.getElementById('pacerLabel');
+    const circle = document.getElementById('pacerCircle');
+
+    pacerActive = !pacerActive;
+    if (pacerActive) {
+      btn.textContent = 'Stop';
+      pacerCycle();
+    } else {
+      btn.textContent = 'Start Breathing';
+      label.textContent = 'Press start when you\u2019re ready';
+      clearTimeout(pacerTimeout);
+      circle.style.transition = 'transform 1s ease-in-out';
+      circle.style.transform = 'scale(1)';
+    }
+  }
+
+  function showState(which) {
+    document.getElementById('stateHyper').classList.remove('visible');
+    document.getElementById('stateHypo').classList.remove('visible');
+    if (which === 'hyper') {
+      document.getElementById('stateHyper').classList.add('visible');
+    } else {
+      document.getElementById('stateHypo').classList.add('visible');
+    }
+  }
+</script>
+
+</body>
+</html>
